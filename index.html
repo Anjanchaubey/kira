@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Page</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 3s;
+            background-image: linear-gradient(to bottom, #212121, #333);
+            color: #fff;
+        }
+        .container {
+            max-width: 400px;
+            padding: 40px;
+            background-image: url('container.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #555;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .container h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        input[type="password"] {
+            width: 90%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-size: 16px;
+            background-color: #555;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+        input[type="password"]:focus {
+            background-color: #666;
+            outline: none;
+        }
+        button {
+            background-color: #666;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        button:hover {
+            background-color: #777;
+            transform: scale(1.05);
+        }
+        #welcome-message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Protected Page</h1>
+        <input type="password" id="password" placeholder="Enter Password">
+        <button id="submit">Submit</button>
+        <div id="welcome-message"></div>
+    </div>
+
+    <script>
+        let backgrounds = ['wall1.jpg', 'wall2.jpg', 'wall3.jpg', 'wall4.jpg', 'wall5.jpg'];
+        let currentBackground = 0;
+        document.body.style.backgroundImage = `url(${backgrounds[currentBackground]})`;
+
+        setInterval(() => {
+            currentBackground = (currentBackground + 1) % backgrounds.length;
+            document.body.style.backgroundImage = `url(${backgrounds[currentBackground]})`;
+        }, 3000);
+
+        const password = document.getElementById('password');
+        const submit = document.getElementById('submit');
+        const welcomeMessage = document.getElementById('welcome-message');
+
+        submit.addEventListener('click', () => {
+            if (password.value === '145236') {
+                welcomeMessage.innerHTML = 'Welcome! You have successfully logged in.';
+                welcomeMessage.classList.add('success');
+                welcomeMessage.classList.remove('error');
+                setTimeout(() => {
+                    window.location.href = 'kira.html';
+                }, 2000);
+            } else {
+                welcomeMessage.innerHTML = 'Incorrect password. Please try again.';
+                welcomeMessage.classList.add('error');
+                welcomeMessage.classList.remove('success');
+            }
+        });
+    </script>
+</body>
+</html>

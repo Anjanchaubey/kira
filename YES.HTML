@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Days Challenge</title>
+    <style>
+        body {
+            font-family: 'Arial Black', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #000;
+            background: linear-gradient(80deg,  #C2C5C7, #4CAF50,#C2C5C7 , #FFEB3B);
+            background-size: 600% 600%;
+            animation: gradient 5s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #000;
+            text-decoration: underline;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .day-box {
+            background: #fff;
+            border: 2px solid transparent;
+            border-bottom: 9.5px solid #42088d;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s, background-color 0.3s;
+        }
+
+        .day-box:hover {
+            transform: scale(1.05);
+            transition: 0.9s;
+            background: linear-gradient(800deg, #C2C5C7, #dec71445);
+            background-size: 600% 600%;
+            animation: gradient 3s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .day-box.completed {
+            background-color: #4CAF50;
+            border-bottom: 10px solid #FFEB3B;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: yellow;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            width: 80%;
+            max-width: 500px;
+            z-index: 1000;
+            overflow: auto;
+            border: 2px solid #FF5722;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .popup.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .popup.hide {
+            display: none;
+            opacity: 0;
+        }
+
+        .popup .close-btn {
+            background: #FF5722;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            transition: background 0.3s;
+        }
+
+        .popup .close-btn:hover {
+            background: #E64A19;
+        }
+
+        .popup label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .popup input[type="text"],
+        .popup textarea,
+        .popup select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .popup input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .popup .submit-btn {
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .popup .submit-btn:hover {
+            background: #388E3C;
+        }
+        
+        .todo-list {
+            text-align: left;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        .todo-item {
+            background: #f3e5e5;
+            border: 2px solid #050505;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Discipline</h1>
+    <div class="calendar">
+        <!-- 30 Day Boxes -->
+        <!-- Add an ID for each box for easy reference -->
+        <div class="day-box" data-day="1"><span>1</span></div>
+        <div class="day-box" data-day="2"><span>2</span></div>
+        <div class="day-box" data-day="3"><span>3</span></div>
+        <div class="day-box" data-day="4"><span>4</span></div>
+        <div class="day-box" data-day="5"><span>5</span></div>
+        <div class="day-box" data-day="6"><span>6</span></div>
+        <div class="day-box" data-day="7"><span>7</span></div>
+        <div class="day-box" data-day="8"><span>8</span></div>
+        <div class="day-box" data-day="9"><span>9</span></div>
+        <div class="day-box" data-day="10"><span>10</span></div>
+        <div class="day-box" data-day="11"><span>11</span></div>
+        <div class="day-box" data-day="12"><span>12</span></div>
+        <div class="day-box" data-day="13"><span>13</span></div>
+        <div class="day-box" data-day="14"><span>14</span></div>
+        <div class="day-box" data-day="15"><span>15</span></div>
+        <div class="day-box" data-day="16"><span>16</span></div>
+        <div class="day-box" data-day="17"><span>17</span></div>
+        <div class="day-box" data-day="18"><span>18</span></div>
+        <div class="day-box" data-day="19"><span>19</span></div>
+        <div class="day-box" data-day="20"><span>20</span></div>
+        <div class="day-box" data-day="21"><span>21</span></div>
+        <div class="day-box" data-day="22"><span>22</span></div>
+        <div class="day-box" data-day="23"><span>23</span></div>
+        <div class="day-box" data-day="24"><span>24</span></div>
+        <div class="day-box" data-day="25"><span>25</span></div>
+        <div class="day-box" data-day="26"><span>26</span></div>
+        <div class="day-box" data-day="27"><span>27</span></div>
+        <div class="day-box" data-day="28"><span>28</span></div>
+        <div class="day-box" data-day="29"><span>29</span></div>
+        <div class="day-box" data-day="30"><span>30</span></div> 
+    </div>
+
+    <!-- Popup Form -->
+    <div class="popup" id="popup-form">
+        <button class="close-btn" onclick="closePopup()">✖</button>
+        <h2>Daily Review</h2>
+        <label for="comments">Comments:</label>
+        <textarea id="comments" rows="4" placeholder="How was your day?"></textarea>
+
+        <label for="study-hours">Number of Hours in Study:</label>
+        <select id="study-hours">
+            <option value="1">1 Hour</option>
+            <option value="2">2 Hours</option>
+            <option value="3">3 Hours</option>
+            <option value="4">4 Hours</option>
+            <option value="5">5 Hours</option>
+            <option value="6">6 Hours</option>
+            <option value="7">7 Hours</option>
+            <option value="8">8 Hours</option>
+            <option value="9">9 Hours</option>
+            <option value="10">10 Hours</option>
+        </select>
+
+        <label>Procrastinated:</label>
+        <input type="radio" id="procrastinated" name="procrastinated" value="yes">
+        <label for="procrastinated">Yes</label>
+        <input type="radio" id="no-procrastinated" name="procrastinated" value="no">
+        <label for="no-procrastinated">No</label>
+
+        <label for="todo-list">To-Do List for Tomorrow:</label>
+        <textarea id="todo-list" rows="3" placeholder="Add your tasks here"></textarea>
+
+        <button class="submit-btn" onclick="submitForm()">Submit</button>
+    </div>
+
+    <div class="todo-list" id="todo-list-container"></div>
+
+
+    
+    <script>
+        document.querySelectorAll('.day-box').forEach(box => {
+            box.addEventListener('click', function() {
+                const day = this.dataset.day;
+                openPopup(day);
+                loadDayInfo(day);
+            });
+        });
+
+        function openPopup(day) {
+            document.getElementById('popup-form').style.display = 'block';
+            document.getElementById('popup-form').dataset.day = day;
+        }
+
+        function closePopup() {
+            document.getElementById('popup-form').style.display = 'none';
+        }
+
+        function submitForm() {
+            const day = document.getElementById('popup-form').dataset.day;
+            const comments = document.getElementById('comments').value;
+            const studyHours = document.getElementById('study-hours').value;
+            const procrastinated = document.querySelector('input[name="procrastinated"]:checked').value;
+            const todoList = document.getElementById('todo-list').value;
+
+            // Store data in localStorage
+            localStorage.setItem(`day-${day}`, JSON.stringify({ comments, studyHours, procrastinated, todoList }));
+
+            // Update the box style
+            const box = document.querySelector(`.day-box[data-day="${day}"]`);
+            box.classList.add('completed');
+
+            // Hide popup
+            closePopup();
+
+            // Render the updated todo list
+            renderTodoList();
+        }
+
+        function loadDayInfo(day) {
+            const data = JSON.parse(localStorage.getItem(`day-${day}`));
+            if (data) {
+                document.getElementById('comments').value = data.comments || '';
+                document.getElementById('study-hours').value = data.studyHours || '1';
+                document.querySelector(`input[name="procrastinated"][value="${data.procrastinated || 'no'}"]`).checked = true;
+                document.getElementById('todo-list').value = data.todoList || '';
+            } else {
+                document.getElementById('comments').value = '';
+                document.getElementById('study-hours').value = '1';
+                document.querySelector('input[name="procrastinated"][value="no"]').checked = true;
+                document.getElementById('todo-list').value = '';
+            }
+        }
+
+        function renderTodoList() {
+            const todoContainer = document.getElementById('todo-list-container');
+            todoContainer.innerHTML = '';
+
+            for (let i = 1; i <= 30; i++) {
+                const data = JSON.parse(localStorage.getItem(`day-${i}`));
+                if (data && data.todoList) {
+                    const todoItem = document.createElement('div');
+                    todoItem.textContent = `Day ${i}: ${data.todoList}`;
+                    todoItem.className = 'todo-item';
+                    todoContainer.appendChild(todoItem);
+                }
+            }
+        }
+
+        // Initial rendering of the todo list
+        window.onload = renderTodoList;
+    </script>
+</body>
+</html>
