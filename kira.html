@@ -24,15 +24,16 @@
         }
 
         .content-wrapper {
-            padding: 50px;
+            padding: 40px;
             background: rgba(0, 0, 0, 0.6); /* Dark background with low opacity */
             border-radius: 20px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); /* Add shadow for more depth */
             max-width: 90%;
+            margin-bottom: 20px;
         }
 
         p {
-            font-size: 80px;
+            font-size: 40px; /* Reduced font size */
             margin: 20px 0;
             font-weight: 900;
             letter-spacing: 6px;
@@ -57,12 +58,50 @@
             background-color: #cc0000;
             transform: scale(1.1);
         }
+
+        .steps-wrapper {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1); /* Lighter background for contrast */
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Softer shadow */
+            max-width: 90%;
+            text-align: left; /* Align text to the left */
+        }
+
+        .steps-wrapper h2 {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .steps-wrapper ul {
+            list-style-type: decimal; /* Numbered list */
+            padding-left: 40px;
+            font-size: 24px;
+            line-height: 1.6;
+        }
+
+        .steps-wrapper ul li {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="content-wrapper">
         <p>YOU READY FOR THE TASK, BUDDY?</p>
         <a href="yes.html" class="button">CRACK</a>
+    </div>
+
+    <div class="steps-wrapper">
+        <h2>5 Steps to Maintain Discipline Every Day</h2>
+        <ul>
+            <li>Wake up early and start your day with a positive routine.</li>
+            <li>Set clear goals for the day and prioritize your tasks.</li>
+            <li>Take regular breaks to refresh your mind and stay focused.</li>
+            <li>Avoid distractions and stay committed to your tasks.</li>
+            <li>Reflect on your day and plan for tomorrow before going to bed.</li>
+        </ul>
     </div>
 
     <script>
